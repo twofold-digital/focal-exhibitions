@@ -125,6 +125,15 @@ function initSwiperSlider() {
 
     const [base, tablet, desktop] = config;
     const speed = parseFloat(swiperGroup.getAttribute('data-swiper-speed')) || 600;
+    
+    // Remove Webflow's CMS list role so Swiper's carousel roles are valid
+    const listWrapper = swiperSliderWrap.querySelector('.swiper-wrapper');
+    if (listWrapper) {
+      listWrapper.removeAttribute('role');
+      listWrapper.querySelectorAll(':scope > [role="listitem"]').forEach((slide) => {
+        slide.removeAttribute('role');
+      });
+    }
 
     // Infinite loop: data-swiper-loop="true"
     const loop = swiperGroup.getAttribute('data-swiper-loop') === 'true';
@@ -149,15 +158,6 @@ function initSwiperSlider() {
           wrapper.appendChild(clone);
         });
       }
-    }
-    
-    // Remove Webflow's CMS list semantics so Swiper's carousel roles are valid
-    const wrapperEl = group.querySelector('.swiper-wrapper');
-    if (wrapperEl) {
-      wrapperEl.removeAttribute('role');
-      wrapperEl.querySelectorAll(':scope > [role="listitem"]').forEach(function (slide) {
-        slide.removeAttribute('role');
-      });
     }
 
     const swiper = new Swiper(swiperSliderWrap, {

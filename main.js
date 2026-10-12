@@ -155,7 +155,6 @@ function initSwiperSlider() {
       ...base,
       speed,
       loop,
-      a11y: { slideRole: 'listitem' },
       initialSlide: startSlide,
       //mousewheel: true,
       grabCursor: true,

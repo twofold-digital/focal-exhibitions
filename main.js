@@ -150,6 +150,15 @@ function initSwiperSlider() {
         });
       }
     }
+    
+    // Remove Webflow's CMS list semantics so Swiper's carousel roles are valid
+    const wrapperEl = group.querySelector('.swiper-wrapper');
+    if (wrapperEl) {
+      wrapperEl.removeAttribute('role');
+      wrapperEl.querySelectorAll(':scope > [role="listitem"]').forEach(function (slide) {
+        slide.removeAttribute('role');
+      });
+    }
 
     const swiper = new Swiper(swiperSliderWrap, {
       ...base,
